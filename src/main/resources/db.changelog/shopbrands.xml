@@ -1,0 +1,38 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Add your change sets here -->
+    <changeSet id="5" author="thesriharsha">
+        <createTable tableName="shopbrands">
+            <column name="id" type="int" autoIncrement="true" startWith="501" incrementBy="1">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="profit%" type="money">
+                <constraints nullable="false"/>
+            </column>
+            <column name="brand_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="shopbrands"
+                                 baseColumnNames="brand_id"
+                                 constraintName="fk_sbrand_id"
+                                 referencedTableName="brands"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="shopbrands"
+                                 baseColumnNames="shop_id"
+                                 constraintName="fk_sshop_id"
+                                 referencedTableName="shops"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="5.1" author="thesriharsha">
+        <renameColumn tableName="shopbrands" oldColumnName="profit%" newColumnName="profit_per"/>
+    </changeSet>
+</databaseChangeLog>

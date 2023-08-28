@@ -1,0 +1,29 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Add your change sets here -->
+
+    <changeSet id="3" author="thesriharsha">
+        <createTable tableName="models">
+            <column name="id" type="int" autoIncrement="true" startWith="301" incrementBy="1">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="Varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="money">
+                <constraints nullable="false"/>
+            </column>
+            <column name="brand_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="models" baseColumnNames="brand_id" constraintName="fk_mbrand_id"
+                                 referencedTableName="brands"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>

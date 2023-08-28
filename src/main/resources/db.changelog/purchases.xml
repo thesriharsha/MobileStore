@@ -1,0 +1,45 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Add your change sets here -->
+
+    <changeSet id="4" author="thesriharsha">
+        <createTable tableName="purchases">
+            <column name="id" type="int" autoIncrement="true" startWith="401" incrementBy="1">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="customer_name" type="Varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="purchase_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_price" type="money">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="purchases"
+                                 baseColumnNames="model_id"
+                                 constraintName="fk_pmodel_id"
+                                 referencedTableName="models"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="purchases"
+                                 baseColumnNames="shop_id"
+                                 constraintName="fk_pshop_id"
+                                 referencedTableName="shops"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="4.1" author="thesriharsha">
+        <dropColumn tableName="purchases" columnName="total_price" />
+    </changeSet>
+</databaseChangeLog>
