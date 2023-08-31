@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Add your change sets here -->
+
+    <changeSet id="8" author="thesriharsha">
+        <createTable tableName="shopusers">
+            <column name="id" type="int" autoIncrement="true" startWith="801" incrementBy="1">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="shopusers" baseColumnNames="user_id" constraintName="fk_suuser_id" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="shopusers" baseColumnNames="shop_id" constraintName="fk_sushop_id" referencedTableName="shops"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

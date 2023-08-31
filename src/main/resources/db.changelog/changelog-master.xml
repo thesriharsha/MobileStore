@@ -10,4 +10,8 @@
     <include file="classpath:db.changelog/models.xml"/>
     <include file="classpath:db.changelog/purchases.xml"/>
     <include file="classpath:db.changelog/shopbrands.xml"/>
+    <include file="classpath:db.changelog/roles.xml"/>
+    <include file="classpath:db.changelog/users.xml"/>
+
+    <include file="classpath:db.changelog/shopusers.xml"/>
 </databaseChangeLog>
