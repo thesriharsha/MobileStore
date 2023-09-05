@@ -1,9 +1,13 @@
 package com.mobileshop.controller;
 
+import com.mobileshop.custom.exception.ControllerException;
+import com.mobileshop.custom.exception.EmptyInputException;
 import com.mobileshop.entities.Shop;
 import com.mobileshop.repos.ShopRepo;
+import com.mobileshop.service.ShopServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,18 +19,36 @@ public class ShopController {
     @Autowired
     private ShopRepo shopRepo;
 
+    @Autowired
+    private ShopServiceImpl shopService;
+
     @GetMapping("/all/shops")
-    public List<Shop> getShops()
+    public ResponseEntity<?> getShops()
     {
-        return shopRepo.findAll();
+        try{
+            var shops = shopService.getAllShops();
+            return new ResponseEntity<List<Shop>>(shops,HttpStatus.OK);
+        }
+        catch (EmptyInputException e)
+        {
+            ControllerException ce = new ControllerException(e.getErrorCode(),e.getErrorMessage());
+            return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e)
+        {
+            ControllerException ce = new ControllerException("111","Something went wrong in Controller");
+            return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @PostMapping("/add/shop")
-    public String addShop(@RequestBody Shop shop)
+    @GetMapping("shopbyId")
+    public ResponseEntity<?> shopById(@RequestParam() int id)
     {
-        shopRepo.save(shop);
-        return shop.getName();
+            var shop = shopService.getShopById(id);
+            return new ResponseEntity<Shop>(shop,HttpStatus.OK);
     }
+
+
 
     @PutMapping("update/shopprofit")
     public Shop updateShop(@RequestParam() int id, @RequestParam() double profit)
@@ -52,6 +74,7 @@ public class ShopController {
         }
         throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"No Shop found with the given id");
     }
+
 
 
 
