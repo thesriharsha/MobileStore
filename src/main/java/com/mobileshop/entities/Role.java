@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="roles")
+
 public class Role {
 
     @Id
@@ -31,4 +32,6 @@ public class Role {
         this.id = id;
         this.name = name;
     }
+
+
 }

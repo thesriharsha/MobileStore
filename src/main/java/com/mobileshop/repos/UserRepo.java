@@ -1,12 +1,12 @@
 package com.mobileshop.repos;
 
-import com.mobileshop.entities.User;
+import com.mobileshop.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-public interface UserRepo extends JpaRepository<User,Integer> {
+import java.util.Optional;
 
-    @Query("from User where name=:username")
-    public  User getUser(@Param("username") String username);
+public interface UserRepo extends JpaRepository<UserEntity, Integer> {
+
+    Optional<UserEntity> findByUsername(String username);
+    Boolean existsByUsername(String username);
 }
