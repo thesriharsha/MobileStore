@@ -47,13 +47,9 @@ public class BillCalculationServiceImp implements BillCalculationService{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"The given Brand is not Available at the given Shop");
         }
 
-
         double brandProfit = bP;
 
-
-
         return (modelPrice*(1+(brandProfit/100)))*(1+(shopProfit/100));
-
-
     }
 }
+

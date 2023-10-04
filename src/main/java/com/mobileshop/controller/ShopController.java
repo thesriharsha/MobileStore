@@ -2,6 +2,7 @@ package com.mobileshop.controller;
 
 import com.mobileshop.custom.exception.ControllerException;
 import com.mobileshop.custom.exception.EmptyInputException;
+import com.mobileshop.custom.exception.IdNotFoundException;
 import com.mobileshop.entities.Shop;
 import com.mobileshop.repos.ShopRepo;
 import com.mobileshop.service.ShopServiceImpl;
@@ -42,7 +43,7 @@ public class ShopController {
     }
 
     @GetMapping("shopbyId")
-    public ResponseEntity<?> shopById(@RequestParam() int id)
+    public ResponseEntity<?> shopById(@RequestParam() int id)throws IdNotFoundException
     {
             var shop = shopService.getShopById(id);
             return new ResponseEntity<Shop>(shop,HttpStatus.OK);

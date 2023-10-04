@@ -1,8 +1,12 @@
 package com.mobileshop.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
 
 @Entity
+@Data
+//@Builder
 @Table(name = "shops")
 public class Shop {
 
@@ -43,6 +47,23 @@ public class Shop {
     }
 
     public void setProfitPer(double profitPer) {
+        this.profitPer = profitPer;
+    }
+
+    public Shop() {
+    }
+
+    public Shop( String name, String location, double profitPer) {
+//        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.profitPer = profitPer;
+    }
+
+    public Shop( int id,String name, String location, double profitPer) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
         this.profitPer = profitPer;
     }
 }

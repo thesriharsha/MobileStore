@@ -2,9 +2,9 @@ package com.mobileshop.controller;
 
 import com.mobileshop.entities.Model;
 import com.mobileshop.repos.ModelRepo;
-import com.mobileshop.repos.ShopRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +21,7 @@ public class ModelController {
     {
         return modelRepo.findAll();
     }
+
 
     @PostMapping("/add/model")
     public String addModel(@RequestBody Model model)

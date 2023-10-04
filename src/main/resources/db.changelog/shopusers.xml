@@ -6,21 +6,18 @@
     <!-- Add your change sets here -->
 
     <changeSet id="8" author="thesriharsha">
-        <createTable tableName="shopusers">
-            <column name="id" type="int" autoIncrement="true" startWith="801" incrementBy="1">
-                <constraints primaryKey="true"/>
-            </column>
+        <createTable tableName="userroles">
             <column name="user_id" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="shop_id" type="int">
+            <column name="role_id" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="shopusers" baseColumnNames="user_id" constraintName="fk_suuser_id" referencedTableName="users"
+        <addForeignKeyConstraint baseTableName="userroles" baseColumnNames="user_id" constraintName="fk_suuser_id" referencedTableName="users"
                                  referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="shopusers" baseColumnNames="shop_id" constraintName="fk_sushop_id" referencedTableName="shops"
+        <addForeignKeyConstraint baseTableName="userroles" baseColumnNames="role_id" constraintName="fk_sushop_id" referencedTableName="roles"
                                  referencedColumnNames="id"/>
     </changeSet>
 

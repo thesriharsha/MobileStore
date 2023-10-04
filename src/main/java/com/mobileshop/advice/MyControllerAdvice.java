@@ -18,7 +18,7 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IdNotFoundException.class)
     public ResponseEntity<String> handleIdNotFound(IdNotFoundException idNotFoundException)
     {
-        return new ResponseEntity<String>("Given ID is not found, please check", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>(idNotFoundException.getErrorMessage(), HttpStatus.BAD_REQUEST);
     }
 
     // Handling a system in-built method

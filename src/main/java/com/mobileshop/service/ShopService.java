@@ -1,5 +1,6 @@
 package com.mobileshop.service;
 
+import com.mobileshop.custom.exception.IdNotFoundException;
 import com.mobileshop.entities.Shop;
 
 import java.util.List;
@@ -10,5 +11,5 @@ public interface ShopService {
 
     public List<Shop> getAllShops();
 
-    public Shop getShopById(int id);
+    public Shop getShopById(int id) throws IdNotFoundException;
 }

@@ -7,6 +7,8 @@ import com.mobileshop.repos.ShopRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.catalog.Catalog;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,6 +18,13 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private ShopRepo shopRepo;
+
+    public ShopServiceImpl(ShopRepo shopRepo) {
+        this.shopRepo = shopRepo;
+    }
+
+    public ShopServiceImpl() {
+    }
 
     @Override
     public Shop addShop(Shop shop) {
@@ -41,12 +50,10 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public List<Shop> getAllShops() {
 
-        List<Shop> shops;
-        try {
+        List<Shop> shops = new ArrayList<>();
+
             shops = shopRepo.findAll();
-        } catch (Exception e) {
-            throw new EmptyInputException("105", "Something is wrong" + e.getMessage());
-        }
+
         if (shops.isEmpty()) {
             throw new EmptyInputException("104", "There are no shops to display");
         }
@@ -55,7 +62,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Shop getShopById(int id) {
+    public Shop getShopById(int id)throws IdNotFoundException {
         try {
             return shopRepo.findById(id).get();
         }
@@ -68,4 +75,10 @@ public class ShopServiceImpl implements ShopService {
         }
 
     }
+
+    public int test(String s){
+        return Integer.parseInt(s);
+    }
+
+
 }

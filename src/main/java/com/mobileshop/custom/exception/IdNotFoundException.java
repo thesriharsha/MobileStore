@@ -1,6 +1,6 @@
 package com.mobileshop.custom.exception;
 
-public class IdNotFoundException extends RuntimeException {
+public class IdNotFoundException extends Exception {
 
     private String errorCode;
     private String errorMessage;
